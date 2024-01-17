@@ -31,10 +31,13 @@ jobs:
       - name: Start server and download static content with wget
         run: |
             cd app &&  
-            npm run build
+            npm run dev &
+            sleep 10 &&
+            wget --mirror http://localhost:3000 -P out --no-host-directories --page-requisites --adjust-extension
+  
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: app/build
+          personal_token: ${{ secrets.GH_API_TOKEN }}
+          publish_dir: /app/out
