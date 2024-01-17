@@ -26,7 +26,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: install dependencies
-        run: npm install
+        run: cd app && npm install
 
       - name: Start server and download static content with wget
         run: |
